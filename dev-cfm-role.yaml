@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Resources:
+  devcfmRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: "dev-cfm-role"
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/AdministratorAccess"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS:
+                - "arn:aws:iam::291945876399:root"
+                # - 'arn:aws:iam::xxxxxxxxxxxxx:root'
+                # - 'arn:aws:iam::xxxxxxxxxxxxx:user/gritworks-dev-cliuser'
+                # - 'arn:aws:iam::xxxxxxxxxxxxx:user/gritworks-security-cliuser'
+            Action:
+              - "sts:AssumeRole"
+      MaxSessionDuration: 7200 # default 3600 seconds = 1 hour
+Outputs:
+  devRoleARN:
+    Description: dev-cfm-role ARN
+    Value: !GetAtt devcfmRole.Arn

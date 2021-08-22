@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Resources:
+  masteruser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: "master-user"
+      # LoginProfile:
+      #   Password:
+      #     !Ref Password
+      #   PasswordResetRequired: true
+      # policy:
+      #   -
+  AccessKeyFormasteruser: # accesskey for master-user
+    Type: AWS::IAM::AccessKey
+    Properties:
+      UserName: !Ref masteruser
+  Adminpolicyformasteruser: # inline policy (how to create policy and attach with user)
+    Type: "AWS::IAM::Policy"
+    Properties:
+      PolicyName: "AWSAdminRightMasterUser"
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action: "*"
+            Resource: "*"
+      Users:
+        - !Ref masteruser
+Outputs:
+  AccessKeyFormasteruser:
+    Description: AWSAccessKeyId of master-user
+    Value: !Ref AccessKeyFormasteruser
+  SecretKeyFormasteruser:
+    Description: AWSSecretKey master-user
+    Value: !GetAtt AccessKeyFormasteruser.SecretAccessKey

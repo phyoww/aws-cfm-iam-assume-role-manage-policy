@@ -1,0 +1,31 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Resources:
+  RootRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      RoleName: "Prod-cfm-role"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS:
+                - "arn:aws:iam::291945876399:root"
+            Action:
+              - "sts:AssumeRole"
+  CreateTestPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: "prod-cfm-policy" #attach to prod-cfm-role as manage policy , not inline"
+      Description: "Policy for creating a test database"
+      Path: "/"
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Action:
+              - iam:ListRoles
+              - sts:AssumeRole
+            Resource: "*"
+      Roles:
+        - !Ref RootRole

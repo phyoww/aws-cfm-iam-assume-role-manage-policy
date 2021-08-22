@@ -12,10 +12,7 @@ Resources:
           - Effect: Allow
             Principal:
               AWS:
-                - "arn:aws:iam::291945876399:root"
-                # - 'arn:aws:iam::xxxxxxxxxxxxx:root'
-                # - 'arn:aws:iam::xxxxxxxxxxxxx:user/gritworks-dev-cliuser'
-                # - 'arn:aws:iam::xxxxxxxxxxxxx:user/gritworks-security-cliuser'
+                - "arn:aws:iam::XXXXXXXXXXXX:root" #cloudideastar-master
             Action:
               - "sts:AssumeRole"
       MaxSessionDuration: 7200 # default 3600 seconds = 1 hour

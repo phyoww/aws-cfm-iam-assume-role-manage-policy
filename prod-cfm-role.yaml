@@ -10,7 +10,7 @@ Resources:
           - Effect: Allow
             Principal:
               AWS:
-                - "arn:aws:iam::291945876399:root"
+                - "arn:aws:iam::XXXXXXXXXXXX:root" #cloudideastar-master
             Action:
               - "sts:AssumeRole"
   CreateTestPolicy:
